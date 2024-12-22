@@ -1,0 +1,68 @@
+<div class="login-container">
+    <!-- Left Section with Image -->
+    <div class="image-section">
+      <img
+        src="../../assets/pexels-pluyar-786003.jpg"
+        alt="Shoe"
+        class="zoom-image"
+      />
+    </div>
+  
+    <!-- Right Section with Login Form -->
+    <div class="form-section">
+      <h1>Welcome Back!</h1>
+      <p>Log in now to explore all the features and benefits of our platform and see what's new.</p>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="email">Enter your email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            [class.invalid]="email.invalid && email.touched"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error">
+            Email is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Enter your Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            [class.invalid]="password.invalid && password.touched"
+          />
+          <div *ngIf="password.invalid && password.touched" class="error">
+            Password is required
+          </div>
+        </div>
+  
+        <!-- <div class="form-options">
+          <label>
+            <input type="checkbox" />
+            Remember my account
+          </label>
+          <a routerLink="/register">Forgot Password?</a>
+        </div> -->
+  
+        <button
+          type="submit"
+          [disabled]="!loginForm.valid || loginDisabled"
+          class="login-btn"
+        >
+          Login
+        </button>
+  
+        <p class="register">
+          Don’t have an account? <a routerLink="/registration">Register Now</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- <router-outlet></router-outlet> -->
+  
+  

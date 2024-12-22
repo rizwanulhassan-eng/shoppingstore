@@ -1,0 +1,54 @@
+<div class="product-details" *ngIf="product">
+    <!-- Upper Section -->
+    <div class="upper-section">
+      <!-- Product Image -->
+      <div class="product-image-section">
+        <img [src]="product.image" alt="{{ product.name }}" class="main-image" />
+      </div>
+  
+      <!-- Product Info -->
+      <div class="product-info-section">
+        <h1>{{ product.name }}</h1>
+        <p>Category: {{ product.category }}</p>
+        <p class="product-price">{{ product.price }}</p>
+        <p class="product-rating">
+          Rating:
+          <span *ngFor="let star of [1, 2, 3, 4, 5]">
+            <span
+              class="star"
+              [class.filled-star]="star <= product.rating"
+            >&#9733;</span> <!-- Unicode for star -->
+          </span>
+          ({{ product.rating }})
+        </p>
+        <p>{{ product.discount }}</p>
+  
+        <!-- Size Selection -->
+        <div class="size-selector">
+          <label>Choose Size:</label>
+          <div class="size-options">
+            <div
+              class="size-box"
+              *ngFor="let size of availableSizes"
+              [class.selected]="selectedSize === size"
+              (click)="selectSize(size)"
+            >
+              {{ size }}
+            </div>
+          </div>
+          <p *ngIf="selectedSize" class="selected-size">Selected Size: {{ selectedSize }}</p>
+        </div>
+  
+        <!-- Action Buttons -->
+        <button class="add-to-cart-button" (click)="addToCart(product)">Add to Cart</button>
+        <button class="buy-now-button">Buy Now</button>
+      </div>
+    </div>
+  
+    <!-- Product Description -->
+    <div class="product-description">
+      <h3>Description</h3>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+  

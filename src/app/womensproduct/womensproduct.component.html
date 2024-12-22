@@ -1,0 +1,23 @@
+<!-- mens product section -->
+
+<div class="men-section">
+    
+    <div class="product-card" *ngFor="let product of products" (mouseenter)="showDetailsBox(product.id)" (mouseleave)="hideDetailsBox()">
+      <div class="black-friday-banner">Black Friday Offer!</div>
+      <img [src]="product.image" alt="{{ product.category }}" class="product-image" />
+      <h3 class="product-title">{{ product.category }}</h3>
+      <button (click)="addToCart(product)">Add to Cart</button>
+      <div
+      class="hover-box"
+      *ngIf="hoveredProductId === product.id"
+      (click)="goToProductDetails(product.id)"
+    >
+      View Details
+    </div>
+    </div>
+  </div>
+  
+  <!-- Toaster Messages -->
+  <div *ngIf="toastMessage" class="toaster" [ngClass]="{ 'show': showtoast }">{{ toastMessage }}</div>
+  
+

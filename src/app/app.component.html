@@ -1,0 +1,43 @@
+
+  
+<nav class="navbar">
+  <!-- Left: Logo -->
+  <div class="navbar-logo">
+      <h2>MetaShop</h2>
+    </div>
+  
+    <!-- Middle: Page Links -->
+    <ul class="navbar-links">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/womenproduct">Women</a></li>
+      <li><a routerLink="/menproduct">men</a></li>
+      <li><a routerLink="/kidproduct">Kids</a></li>
+      <li><a routerLink="/accessories">Accessories</a></li>
+      
+    </ul>
+  
+    <!-- Right: Cart, Search, Login -->
+    <div class="navbar-actions">
+      <div class="cart">
+        <a routerLink="/cart" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">{{cartCount}}</span>
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <button routerLink="/login" class="login-btn">Login</button>
+    </div>
+  
+    <!-- Hamburger Menu for Mobile -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  
+  
+<router-outlet></router-outlet>

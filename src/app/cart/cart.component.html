@@ -1,0 +1,30 @@
+<div class="cart-page">
+    <!-- Left Section: Cart Items -->
+    <div class="cart-items">
+      <h2>Your Items</h2>
+      <div class="cart-item" *ngFor="let item of cart; let i = index">
+        <img [src]="products[item.id-1].image" alt="{{ products[item.id-1].name }}" />
+        <div class="item-details">
+          <h3>{{ products[item.id-1].name }}</h3>
+          <p>Tk {{ products[item.id-1].price }}</p>
+        </div>
+        <div class="item-actions">
+          <button (click)="decreaseQuantity(i)">
+            <i [class.fas]="true" [class.fa-minus]="item.amount > 1"  [class.fa-trash]="item.amount === 1"></i>
+          </button>
+          <span>{{ item.amount }}</span>
+          <button (click)="increaseQuantity(i)">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Right Section: Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <p>Total: Tk {{ getTotalPrice()  }}</p>
+      <button (click)="placeOrder()">Place Order</button>
+    </div>
+  </div>
+  
