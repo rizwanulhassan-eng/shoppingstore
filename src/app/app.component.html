@@ -1,12 +1,12 @@
 
   
 <nav class="navbar">
-  <!-- Left: Logo -->
+  
   <div class="navbar-logo">
       <h2>MetaShop</h2>
     </div>
   
-    <!-- Middle: Page Links -->
+    
     <ul class="navbar-links" [ngClass]="{ hidden: isNavbarCollapsed }" >
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/womenproduct">Women</a></li>
@@ -16,7 +16,7 @@
       
     </ul>
   
-    <!-- Right: Cart, Search, Login -->
+    
     <div class="navbar-actions">
       <div class="cart">
         <a routerLink="/cart" class="cart-icon">
@@ -36,7 +36,7 @@
       
     </div>
   
-    <!-- Hamburger Menu for Mobile -->
+    
     <div class="hamburger" id="hamburger" (click)="toggleNavbar()" [ngClass]="{ active: isNavbarCollapsed }">
       <span></span>
       <span></span>
@@ -59,13 +59,13 @@
 
 <footer class="footer">
   <div class="footer-container">
-    <!-- Footer Logo and Description -->
+    
     <div class="footer-section">
       <h3 class="footer-logo">ShopEase</h3>
       <p>Your one-stop shop for the latest trends in fashion and accessories. Quality you can trust.</p>
     </div>
 
-    <!-- Footer Links -->
+    
     <div class="footer-section">
       <h4>Quick Links</h4>
       <ul class="footer-links">
@@ -76,7 +76,7 @@
       </ul>
     </div>
 
-    <!-- Footer Social Media -->
+    
     <div class="footer-section">
       <h4>Follow Us</h4>
       <div class="social-icons">
@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <!-- Footer Bottom -->
+  
   <div class="footer-bottom">
     <p>&copy; 2024 ShopEase. All rights reserved.</p>
   </div>

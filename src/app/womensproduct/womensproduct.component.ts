@@ -32,16 +32,16 @@ export class WomensproductComponent implements OnInit{
       
       const allProducts = JSON.parse(storedProducts);
 
-      // Filter products with gender 'female'
+      
       this.products = allProducts.filter((product: any) => product.gender === 'female');
       this.filteredProducts = [...this.products];
       let categories = this.filterService.getCategoriesByGender('female');
       
       this.categories = ['All',...new Set(categories.map(item => item.toLowerCase()))];
-    // Add 'all' category and assign to this.categories
+    
     
       console.log(this.categories);
-      // this.categories.unshift('All'); 
+      
     } else {
       console.warn('No products found in local storage');
     }
@@ -77,7 +77,7 @@ export class WomensproductComponent implements OnInit{
     const storedCart = sessionStorage.getItem('cart');
     let cart = storedCart ? JSON.parse(storedCart) : [];
 
-    // Check if the product already exists in the cart
+    
     const existingProduct = cart.find((item: any) => item.id === product.id);
     if (existingProduct) {
       this.showToast('Product is already added to the cart!');
@@ -85,7 +85,7 @@ export class WomensproductComponent implements OnInit{
       const newProduct = {
         id: product.id,
         size: "",
-        amount: 1, // Initial amount is 0
+        amount: 1, 
         price:product.price
       };
       
@@ -145,14 +145,6 @@ export class WomensproductComponent implements OnInit{
     product.category.toLowerCase().includes(this.selectedCategory));
   }
   }
-  
-  // showSearchBox() {
-  //   this.isSearchBoxVisible = true;
-  // }
-  
-  // hideSearchBox() {
-  //   this.isSearchBoxVisible = false;
-  // }
   
   toggleSearchBox() {
     this.isSearchBoxVisible = !this.isSearchBoxVisible;

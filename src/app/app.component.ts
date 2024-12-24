@@ -10,20 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   
-  // addToCart(product: any) {
-  //   this.cart.push(product);
-  //   console.log('Product added to cart:', product);
-  // }
-
   cartCount: number = 0;
   loggedin!:boolean;
   show=false;
-  
-
-  // updateCartCount(): void {
-  //   const cart = sessionStorage.getItem('cart');
-  //   this.cartCount = cart ? JSON.parse(cart).length : 0;
-  // }
   
   constructor(private cartCountService:CartCountService,private loggingservice:LoggingService,private router:Router,private route: ActivatedRoute){
 
@@ -34,14 +23,12 @@ export class AppComponent implements OnInit{
     const storedProducts = localStorage.getItem('products');
 
     if (!storedProducts || JSON.parse(storedProducts).length === 0) {
-      // Local storage is empty or the array is empty
       localStorage.setItem('products', JSON.stringify(this.products));
       console.log('Products array uploaded to localStorage.');
     } else {
       console.log('Products array already exists in localStorage:', JSON.parse(storedProducts));
     }
     if (!sessionStorage.getItem('isLoggedIn')) {
-      // If not present, set it to false
       sessionStorage.setItem('isLoggedIn', 'false');
   }
   this.cartCountService.cartLength$.subscribe((length) => {
@@ -68,14 +55,14 @@ logout(){
   this.router.navigate(['/login']);
 }
 
-isNavbarCollapsed = true; // Tracks the state of the navbar (collapsed by default)
+isNavbarCollapsed = true; 
 
 toggleNavbar(): void {
   this.isNavbarCollapsed = !this.isNavbarCollapsed;
 }
 
 closeNavbar(): void {
-  this.isNavbarCollapsed = true; // Collapse the menu
+  this.isNavbarCollapsed = true; 
 }
 
 @HostListener('window:resize', ['$event'])
@@ -86,7 +73,6 @@ closeNavbar(): void {
   private adjustNavbarOnResize(): void {
     const windowWidth = window.innerWidth;
     if (windowWidth > 768) {
-      // Automatically show navbar links for larger screens
       this.isNavbarCollapsed = false;
     }
   }
