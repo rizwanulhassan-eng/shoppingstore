@@ -1,12 +1,12 @@
 <!-- mens product section -->
 <div class="search-container">
-    <div class="search-bar">
-      <button class="search-icon" >
+    <div class="search-bar" [class.active]="isSearchBoxVisible">
+      <button class="search-icon" (click)="toggleSearchBox()">
         <i class="fa fa-search"></i>
       </button>
       <input
         type="text"
-        
+        *ngIf="isSearchBoxVisible"
         [(ngModel)]="searchInput"
         (input)="onSearchInput()"
         placeholder="Search products..."
@@ -66,11 +66,11 @@
         <div class="brand">Cloth</div>
         <h3 class="product-title">{{ product.name }}</h3>
         <div class="rating">
-          <span *ngFor="let star of [1,2,3,4,5]; let i = index">
-            <i class="styled-star" [class.filled]="star <= product.rating">★</i>
-          </span>
-          <span class="rating-value">(100)</span>
-        </div>
+            <span *ngFor="let star of [1,2,3,4,5]; let i = index">
+              <i class="styled-star" [class.filled]="star <= product.rating">★</i>
+            </span>
+            <span class="rating-value">(100)</span>
+          </div>
         <div class="by-brand">By Gucci</div>
         <div class="price-container">
           <span class="sale-price">${{ product.price }}</span>
