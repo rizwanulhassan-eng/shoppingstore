@@ -70,7 +70,6 @@ export class RegisterComponent {
       existingUsers.push(newUser);
       localStorage.setItem('users', JSON.stringify(existingUsers));
 
-      alert('Registration successful!');
       this.registerForm.reset();
       this.router.navigate(['/login'])
     }

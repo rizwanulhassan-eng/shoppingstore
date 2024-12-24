@@ -89,9 +89,10 @@ export class AccessoriesComponent implements OnInit {
         amount: 1, // Initial amount is 0
         price:product.price
       };
-      this.cartcountservice.updateCartLength();
+      
       cart.push(newProduct);
       sessionStorage.setItem('cart', JSON.stringify(cart));
+      this.cartcountservice.updateCartLength();
       this.showToast('Product added to cart!');
     }
   }

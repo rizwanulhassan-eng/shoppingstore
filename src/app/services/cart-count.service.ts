@@ -15,7 +15,9 @@ export class CartCountService {
 
   // Method to update cart length based on localStorage
   updateCartLength(): void {
+    
     const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+    console.log(cart.length);
     this.cartLengthSubject.next(cart.length);
   }
 

@@ -47,7 +47,7 @@ export class LoginComponent {
   onLogin() {
     if (!this.loginDisabled) {
       sessionStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate([''],{
+      this.router.navigate(['/order'],{
        queryParams:{checker:this.val} 
       });
     }

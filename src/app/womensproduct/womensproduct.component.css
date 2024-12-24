@@ -419,10 +419,11 @@
   
   /* Search Bar Container */
 .search-container {
-    right:1%;
+    
     position: relative;
+    left: 35%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 10px;
   }
   
@@ -431,6 +432,10 @@
     display: flex;
     align-items: center;
     position: relative;
+    border:1px solid;
+    width: 30%;
+    min-width: 250px;
+    border-radius: 4px;
   }
   
   .search-icon {
@@ -446,10 +451,10 @@
   }
   
   .search-input {
-    display: none;
+    
     margin-left: 10px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border-style: none;
     border-radius: 5px;
     outline: none;
     width: 200px;
@@ -467,7 +472,7 @@
   
   .search-bar:hover .search-input {
     display: inline-block;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
   }
   
   .suggestions {

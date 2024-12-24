@@ -26,7 +26,7 @@ export class MensproductComponent implements OnInit {
   showtoast=false;
   hoveredProductId: number | null = null;
   ngOnInit(): void {
-
+    this.cartcountservice.updateCartLength();
     const storedProducts = localStorage.getItem('products');
     
     if (storedProducts) {
@@ -89,9 +89,10 @@ export class MensproductComponent implements OnInit {
         amount: 1, // Initial amount is 0
         price:product.price
       };
-      this.cartcountservice.updateCartLength();
+      
       cart.push(newProduct);
       sessionStorage.setItem('cart', JSON.stringify(cart));
+      this.cartcountservice.updateCartLength();
       this.showToast('Product added to cart!');
     }
   }

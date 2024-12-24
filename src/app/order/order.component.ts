@@ -103,9 +103,8 @@ export class OrderPageComponent implements OnInit {
       existingOrders.push(orderDetails);
       localStorage.setItem('orders', JSON.stringify(existingOrders));
 
-      alert('Order placed successfully!');
       // Optionally, clear the cart after placing the order
-      localStorage.removeItem('cart');
+      sessionStorage.removeItem('cart');
       this.router.navigate(['']);
     }
   }

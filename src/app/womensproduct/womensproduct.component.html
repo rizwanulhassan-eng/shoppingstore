@@ -1,12 +1,12 @@
 <!-- mens product section -->
 <div class="search-container">
-    <div class="search-bar" [class.active]="isSearchBoxVisible">
-      <button class="search-icon" (click)="toggleSearchBox()">
+    <div class="search-bar">
+      <button class="search-icon" >
         <i class="fa fa-search"></i>
       </button>
       <input
         type="text"
-        *ngIf="isSearchBoxVisible"
+        
         [(ngModel)]="searchInput"
         (input)="onSearchInput()"
         placeholder="Search products..."

@@ -9,7 +9,7 @@ export class LoggingService  {
   getloggedininfo(){
     return sessionStorage.getItem('isLoggedIn')==='true';
   }
-  setloggedininfo(){
-    sessionStorage.setItem('isLoggedIn','true');
+  setloggedininfo(val:string){
+    sessionStorage.setItem('isLoggedIn',val);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartCountService } from '../services/cart-count.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ export class CartComponent {
   orders: any[] = [];
   products: any[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private cartcountservice:CartCountService) {
     // Retrieve cart from sessionStorage
     const storedCart = sessionStorage.getItem('cart');
     this.cart = storedCart ? JSON.parse(storedCart) : [];
@@ -33,7 +34,9 @@ export class CartComponent {
     if (this.cart[index].amount > 1) {
       this.cart[index].amount--;
     } else {
-      this.cart.splice(index, 1); // Remove item if quantity is 1
+      this.cart.splice(index, 1);
+      this.updateCart();
+      this.cartcountservice.updateCartLength() // Remove item if quantity is 1
     }
     this.updateCart();
   }
@@ -66,7 +69,6 @@ export class CartComponent {
     console.log(isLoggedIn);
     if(isLoggedIn)
     {
-      confirm('Do you want to place the order?');
       // const orderSummary = JSON.stringify(this.cart);
       // localStorage.setItem('orderSummary', orderSummary);
       // console.log('Order Summary:', orderSummary);
@@ -76,7 +78,6 @@ export class CartComponent {
       this.cart = [];
     }
     else {
-      alert('You are not logged in. Redirecting to the login page.');
       this.router.navigate(['/login']); // Redirect to the login component
       return;
     }

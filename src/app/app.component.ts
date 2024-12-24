@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
     this.adjustNavbarOnResize();
-    // this.updateCartCount();
+    this.updateCartCount();
     const storedProducts = localStorage.getItem('products');
 
     if (!storedProducts || JSON.parse(storedProducts).length === 0) {
@@ -61,12 +61,11 @@ showprofile()
 }
 logout(){
   console.log(this.loggedin);
-  if(this.loggedin===true){
-  sessionStorage.setItem('isLoggedIn', 'false');
+  this.loggingservice.setloggedininfo('false');
   this.show=!this.show;
-  this.loggedin=false;
-  this.router.navigate(['']);
-}
+  this.loggedin=this.loggingservice.getloggedininfo();
+  this.loggedin=true;
+  this.router.navigate(['/login']);
 }
 
 isNavbarCollapsed = true; // Tracks the state of the navbar (collapsed by default)
@@ -91,7 +90,10 @@ closeNavbar(): void {
       this.isNavbarCollapsed = false;
     }
   }
-
+  updateCartCount(){
+    console.log(this.cartCount);
+    this.cartCount=this.cartCountService.getCartLength();
+  }
 
   products = [
     {
