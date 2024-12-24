@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./order.component.css'],
 })
 export class OrderPageComponent implements OnInit {
+  product:any;
   paymentForm: FormGroup;
   orderItems: any[] = []; // To hold the products in the cart
   subtotal = 0;
@@ -34,17 +35,20 @@ export class OrderPageComponent implements OnInit {
 
   ngOnInit() {
     // Fetch the cart and products from localStorage
-    const cart: number[] = JSON.parse(localStorage.getItem('cart') || '[]'); // Array of product IDs
+    const cart: number[] = JSON.parse(sessionStorage.getItem('cart') || '[]'); // Array of product IDs
     const products: any[] = JSON.parse(localStorage.getItem('products') || '[]'); // Array of all products
-
     // Map cart items to corresponding products
-    this.orderItems = cart.map((id) => products[id-1]);
+    this.product=products;
+    this.orderItems = cart.map((id) => id);
+    
+    
 
     // Calculate subtotal, tax, and total
     this.calculateTotals();
   }
 
   calculateTotals() {
+    console.log(this.orderItems);
     this.subtotal = this.orderItems.reduce((sum, item) => sum + item.price, 0);
     this.tax = +(this.subtotal * 0.075).toFixed(2); // 7.5% tax
     this.total = +(this.subtotal + this.tax).toFixed(2);

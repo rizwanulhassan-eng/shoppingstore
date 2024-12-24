@@ -1,5 +1,8 @@
 import { Component,AfterViewInit, ElementRef, ViewChild, OnInit  } from '@angular/core';
-
+import { CartCountService } from './services/cart-count.service';
+import { LoggingService } from './services/logging.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,15 +16,68 @@ export class AppComponent implements OnInit{
   // }
 
   cartCount: number = 0;
-
+  loggedin!:boolean;
+  show=false;
   
 
-  updateCartCount(): void {
-    const cart = sessionStorage.getItem('cart');
-    this.cartCount = cart ? JSON.parse(cart).length : 0;
+  // updateCartCount(): void {
+  //   const cart = sessionStorage.getItem('cart');
+  //   this.cartCount = cart ? JSON.parse(cart).length : 0;
+  // }
+  
+  constructor(private cartCountService:CartCountService,private loggingservice:LoggingService,private router:Router,private route: ActivatedRoute){
+
   }
+  ngOnInit(): void {
+    // this.updateCartCount();
+    const storedProducts = localStorage.getItem('products');
+
+    if (!storedProducts || JSON.parse(storedProducts).length === 0) {
+      // Local storage is empty or the array is empty
+      localStorage.setItem('products', JSON.stringify(this.products));
+      console.log('Products array uploaded to localStorage.');
+    } else {
+      console.log('Products array already exists in localStorage:', JSON.parse(storedProducts));
+    }
+    if (!sessionStorage.getItem('isLoggedIn')) {
+      // If not present, set it to false
+      sessionStorage.setItem('isLoggedIn', 'false');
+  }
+  this.cartCountService.cartLength$.subscribe((length) => {
+    this.cartCount = length;
+  });
+  this.route.queryParams.subscribe((params)=>
+  {
+    this.loggedin=params['checker']
+  })
+  console.log(this.loggedin);
+}
+
   
-  
+showprofile()
+{
+  this.show=!this.show;
+}
+logout(){
+  console.log(this.loggedin);
+  sessionStorage.setItem('isLoggedIn', 'false');
+  this.show=!this.show;
+  this.loggedin=false;
+  this.router.navigate(['']);
+}
+
+isNavbarCollapsed = true; // Tracks the state of the navbar (collapsed by default)
+
+toggleNavbar(): void {
+  this.isNavbarCollapsed = !this.isNavbarCollapsed;
+}
+
+closeNavbar(): void {
+  this.isNavbarCollapsed = true; // Collapse the menu
+}
+
+
+
   products = [
     {
       id: 1,
@@ -238,13 +294,6 @@ export class AppComponent implements OnInit{
 
   isLoggedIn = false;
 
-  ngOnInit(): void {
-    this.updateCartCount();
-    
-    if (!sessionStorage.getItem('isLoggedIn')) {
-      // If not present, set it to false
-      sessionStorage.setItem('isLoggedIn', 'false');
-  }
-}
+  
   
 }

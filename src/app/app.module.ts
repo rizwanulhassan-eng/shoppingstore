@@ -13,6 +13,9 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderPageComponent } from './order/order.component';
+import { KidsproductComponent } from './kidsproduct/kidsproduct.component';
+import { AccessoriesComponent } from './accessories/accessories.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +28,15 @@ import { OrderPageComponent } from './order/order.component';
     LoginComponent,
     RegisterComponent,
     OrderPageComponent,
+    KidsproductComponent,
+    AccessoriesComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

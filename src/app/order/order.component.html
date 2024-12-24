@@ -3,7 +3,7 @@
     <div class="order-summary">
         <h2>Your Order</h2>
         <div *ngFor="let item of orderItems" class="order-item">
-          <img [src]="item.image" alt="{{ item.name }}" class="order-icon" />
+          <img [src]="product[item.id-1].image" alt="{{ item.name }}" class="order-icon" />
           <div>
             <p class="order-name">{{ item.name }}</p>
             <p class="order-plan">${{ item.price.toFixed(2) }}</p>

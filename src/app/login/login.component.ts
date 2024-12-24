@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoggingService } from '../services/logging.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   loginDisabled: boolean = true;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private loggingservice:LoggingService ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -42,10 +43,13 @@ export class LoginComponent {
     this.loginDisabled = !validUser;
   }
 
+  val:boolean=true;
   onLogin() {
     if (!this.loginDisabled) {
       sessionStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['']);
+      this.router.navigate([''],{
+       queryParams:{checker:this.val} 
+      });
     }
   }
 }

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartCountService } from '../services/cart-count.service';
 import { FilterServiceService } from '../services/filter-service.service';
 import { SearchService } from '../services/search.service';
-import { CartCountService } from '../services/cart-count.service';
+
 @Component({
-  selector: 'app-womensproduct',
-  templateUrl: './womensproduct.component.html',
-  styleUrls: ['./womensproduct.component.css']
+  selector: 'app-accessories',
+  templateUrl: './accessories.component.html',
+  styleUrls: ['./accessories.component.css']
 })
-export class WomensproductComponent implements OnInit{
+export class AccessoriesComponent implements OnInit {
 
   products: any[] = [];
   filteredProducts: any[] = [];
@@ -33,9 +34,9 @@ export class WomensproductComponent implements OnInit{
       const allProducts = JSON.parse(storedProducts);
 
       // Filter products with gender 'female'
-      this.products = allProducts.filter((product: any) => product.gender === 'female');
+      this.products = allProducts.filter((product: any) => product.gender === 'all');
       this.filteredProducts = [...this.products];
-      let categories = this.filterService.getCategoriesByGender('female');
+      let categories = this.filterService.getCategoriesByGender('all');
       
       this.categories = ['All',...new Set(categories.map(item => item.toLowerCase()))];
     // Add 'all' category and assign to this.categories
@@ -60,7 +61,7 @@ export class WomensproductComponent implements OnInit{
 
   applyFilters() {
     this.filteredProducts = this.products.filter((product) => {
-      const matchesCategory = this.selectedCategory === 'All' ||  product.category === this.selectedCategory;
+      const matchesCategory = this.selectedCategory === 'All' ||  product.category.toLowerCase() === this.selectedCategory.toLowerCase();
       const matchesPrice =
         this.selectedPriceRange === 'all' ||
         (this.selectedPriceRange === 'low' && product.price <= 50) ||
@@ -115,7 +116,7 @@ export class WomensproductComponent implements OnInit{
   }
 
   goToProductDetails(productId: number) {
-    this.router.navigate([`/womenproduct/${productId}`]);
+    this.router.navigate([`/kidproduct/${productId}`]);
   }
 
 
@@ -156,4 +157,6 @@ export class WomensproductComponent implements OnInit{
   toggleSearchBox() {
     this.isSearchBoxVisible = !this.isSearchBoxVisible;
   }
+
+
 }

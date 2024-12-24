@@ -61,32 +61,75 @@
 
 
 
-<section class="product-carousel" (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
-  <h2 class="section-title">Men's Collection</h2>
-
-  <!-- Left Arrow Button -->
-  <button class="arrow-btn left-arrow" (click)="scrollLeft()">
-    &#10094;
-  </button>
-
-  <!-- Carousel Container -->
-  <div class="carousel-container" #carousel>
-    <div class="carousel-items">
-      <div class="product-card" *ngFor="let product of products,let i=index">
-        <div class="imagediv"><img [src]="product.image" [alt]="product.name" /></div>
-        <div class="product-info">
-          <h3 class="product-title">{{ product.name }}</h3>
-          <p class="product-category">{{ product.category }}</p>
-          <span class="price">{{ product.price }}</span>
-          
-          <span class="discount">{{ product.discount }}</span>
+<section class="product-carousel">
+    <h2 class="section-title">Men's Latest</h2>
+    <p class="section-description">Details to details is what makes Hexashop different from other themes.</p>
+  
+    <div class="carousel-wrapper">
+      <button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
+  
+      <div class="carousel-container" #carousel>
+        <div class="product-card" *ngFor="let product of products">
+          <div class="image-container">
+            <img [src]="product.image" [alt]="product.name" />
+            <div class="hover-overlay">
+                <button class="icon-btn">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                  <button class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                  <button class="icon-btn">
+                    <i class="fas fa-search"></i>
+                  </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">{{ product.name }}</h3>
+            <p class="price">{{ product.price }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
+    </div>
+  </section>
+  
+  <section class="explore-products">
+    <div class="explore-container">
+      <div class="explore-text">
+        <h2>Explore Our Products</h2>
+        <p>
+          You are allowed to use this HexaShop HTML CSS template. You can feel free to modify or edit this layout. You can convert this template as any kind of ecommerce CMS theme as you wish.
+        </p>
+        <blockquote>
+          Cras gravida, leo quis lobortis tristique, sem dui consequat nunc, sit malesuada.
+        </blockquote>
+        <p>
+          There are 5 pages included in this HexaShop Template and we are providing it to you for absolutely free of charge at our TemplateMo website. Quam, aliquet non enim tempus nulla.
+        </p>
+        <p>
+          Please tell your friends about our great website. Thank you. Venenatis vitae risus eu pretium. Etiam lacinia efficitur nisi at facilisis. Curabitur id suscipit urna sem.
+        </p>
+        <button class="discover-btn">Discover More</button>
+      </div>
+      <div class="explore-images">
+        <div class="explore-item">
+          <img src="../../assets/baner-right-image-01.jpg" alt="Leather Bags" />
+          <h3>Leather Bags</h3>
+          <p>Latest Collection</p>
+        </div>
+        <div class="explore-item">
+          <img src="../../assets/baner-right-image-03.jpg" alt="Dresses" />
+          <h3>Stylish Dresses</h3>
+          <p>Explore Now</p>
+        </div>
+        <div class="explore-item">
+          <img src="../../assets/left-banner-image.jpg" alt="Different Types" />
+          <h3>Different Types</h3>
+          <p>Over 304 Products</p>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Right Arrow Button -->
-  <button class="arrow-btn right-arrow" (click)="scrollRight()">
-    &#10095;
-  </button>
- </section> 
+  </section>
+  

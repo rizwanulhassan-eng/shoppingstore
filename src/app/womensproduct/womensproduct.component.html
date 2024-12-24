@@ -1,20 +1,86 @@
 <!-- mens product section -->
+<div class="search-container">
+    <div class="search-bar" [class.active]="isSearchBoxVisible">
+      <button class="search-icon" (click)="toggleSearchBox()">
+        <i class="fa fa-search"></i>
+      </button>
+      <input
+        type="text"
+        *ngIf="isSearchBoxVisible"
+        [(ngModel)]="searchInput"
+        (input)="onSearchInput()"
+        placeholder="Search products..."
+        class="search-input"
+      />
+    </div>
+    <ul *ngIf="searchSuggestions.length" class="suggestions">
+      <li *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+        {{ suggestion }}
+      </li>
+    </ul>
+  </div>
 
+<div class="container">
+    <div class="sidebar">
+        <h3>Filters</h3>
+        <!-- Filter by Category -->
+        <div class="filter-group">
+          <h4>Categories</h4>
+          <button
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category"
+            (click)="onCategoryChange(category)"
+          >
+            {{ category }}
+          </button>
+        </div>
+    
+        <!-- Filter by Price -->
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <button
+            *ngFor="let range of priceRanges"
+            [class.active]="selectedPriceRange === range.value"
+            (click)="onPriceChange(range.value)"
+          >
+            {{ range.label }}
+          </button>
+        </div>
+      </div>
 <div class="men-section">
     
-    <div class="product-card" *ngFor="let product of products" (mouseenter)="showDetailsBox(product.id)" (mouseleave)="hideDetailsBox()">
+    <div class="product-card" *ngFor="let product of filteredProducts" (mouseenter)="showDetailsBox(product.id)" (mouseleave)="hideDetailsBox()">
       <div class="black-friday-banner">Black Friday Offer!</div>
-      <img [src]="product.image" alt="{{ product.category }}" class="product-image" />
-      <h3 class="product-title">{{ product.category }}</h3>
-      <button (click)="addToCart(product)">Add to Cart</button>
-      <div
-      class="hover-box"
-      *ngIf="hoveredProductId === product.id"
-      (click)="goToProductDetails(product.id)"
-    >
-      View Details
+      <div class="image-container">
+        <img [src]="product.image" [alt]="product.name" />
+        <div class="hover-overlay">
+              <button class="icon-btn" (click)="addToCart(product)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+              <button class="icon-btn" (click)="goToProductDetails(product.id)">
+                <i class="fa fa-info-circle"></i>
+              </button>
+        </div>
     </div>
+    <div class="product-info">
+        <div class="brand">Cloth</div>
+        <h3 class="product-title">{{ product.name }}</h3>
+        <div class="rating">
+          <span *ngFor="let star of [1,2,3,4,5]; let i = index">
+            <i class="styled-star" [class.filled]="star <= product.rating">★</i>
+          </span>
+          <span class="rating-value">(100)</span>
+        </div>
+        <div class="by-brand">By Gucci</div>
+        <div class="price-container">
+          <span class="sale-price">${{ product.price }}</span>
+          <span class="original-price" *ngIf="product.salePrice < product.originalPrice">
+            ${{ product.originalPrice }}
+          </span>
+        </div>
+        <button class="add-to-cart" (click)="addToCart(product)">Add</button>
     </div>
+
   </div>
   
   <!-- Toaster Messages -->

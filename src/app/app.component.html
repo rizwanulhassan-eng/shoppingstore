@@ -7,7 +7,7 @@
     </div>
   
     <!-- Middle: Page Links -->
-    <ul class="navbar-links">
+    <ul class="navbar-links" [ngClass]="{ hidden: !isNavbarCollapsed }" (click)="closeNavbar()">
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/womenproduct">Women</a></li>
       <li><a routerLink="/menproduct">men</a></li>
@@ -24,20 +24,73 @@
           <span class="cart-count">{{cartCount}}</span>
         </a>
       </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search..." />
-        <button><i class="fas fa-search"></i></button>
-      </div>
-      <button routerLink="/login" class="login-btn">Login</button>
+      
+      <ng-container *ngIf="loggedin; else elseTemplate">
+        <button routerLink="/login" class="login-btn">Login</button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a (click)="showprofile()" class="cart-icon">
+          <i class="fa-solid fa-user profile"></i>
+        </a>
+      </ng-template>
+      
     </div>
   
     <!-- Hamburger Menu for Mobile -->
-    <div class="hamburger" id="hamburger">
+    <div class="hamburger" id="hamburger" (click)="toggleNavbar()" [ngClass]="{ active: isNavbarCollapsed }">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </nav>
   
+<div *ngIf="!show; else else1">
+  
+</div>
+
+<ng-template #else1>
+  <ul Class="dropdown-menu">
+    <li routerLink="/profile">Profile</li>
+    <li (click)="logout()">Logout</li>
+  </ul>
+</ng-template>
   
 <router-outlet></router-outlet>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Footer Logo and Description -->
+    <div class="footer-section">
+      <h3 class="footer-logo">ShopEase</h3>
+      <p>Your one-stop shop for the latest trends in fashion and accessories. Quality you can trust.</p>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Footer Social Media -->
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>&copy; 2024 ShopEase. All rights reserved.</p>
+  </div>
+</footer>
+

@@ -41,9 +41,10 @@
             <i
               class="eye-icon"
               (click)="togglePasswordVisibility()"
-              [class.visible]="showPassword"
+              [class.open]="!showPassword"
+              [class.closed]="showPassword"
             >
-              👁️
+            {{ showPassword ? '🙈' : '👁️' }}
             </i>
           </div>
           <div *ngIf="password?.invalid && password?.touched" class="error">
