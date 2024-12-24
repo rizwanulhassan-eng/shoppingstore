@@ -67,7 +67,6 @@ export class CartComponent {
     if(isLoggedIn)
     {
       confirm('Do you want to place the order?');
-      alert('Your order has been placed!');
       // const orderSummary = JSON.stringify(this.cart);
       // localStorage.setItem('orderSummary', orderSummary);
       // console.log('Order Summary:', orderSummary);

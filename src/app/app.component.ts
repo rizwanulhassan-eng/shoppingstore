@@ -1,4 +1,4 @@
-import { Component,AfterViewInit, ElementRef, ViewChild, OnInit  } from '@angular/core';
+import { Component,AfterViewInit, ElementRef, ViewChild, OnInit, HostListener  } from '@angular/core';
 import { CartCountService } from './services/cart-count.service';
 import { LoggingService } from './services/logging.service';
 import { Router } from '@angular/router';
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
 
   }
   ngOnInit(): void {
+    this.adjustNavbarOnResize();
     // this.updateCartCount();
     const storedProducts = localStorage.getItem('products');
 
@@ -53,17 +54,19 @@ export class AppComponent implements OnInit{
   console.log(this.loggedin);
 }
 
-  
+
 showprofile()
 {
   this.show=!this.show;
 }
 logout(){
   console.log(this.loggedin);
+  if(this.loggedin===true){
   sessionStorage.setItem('isLoggedIn', 'false');
   this.show=!this.show;
   this.loggedin=false;
   this.router.navigate(['']);
+}
 }
 
 isNavbarCollapsed = true; // Tracks the state of the navbar (collapsed by default)
@@ -76,6 +79,18 @@ closeNavbar(): void {
   this.isNavbarCollapsed = true; // Collapse the menu
 }
 
+@HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.adjustNavbarOnResize();
+  }
+
+  private adjustNavbarOnResize(): void {
+    const windowWidth = window.innerWidth;
+    if (windowWidth > 768) {
+      // Automatically show navbar links for larger screens
+      this.isNavbarCollapsed = false;
+    }
+  }
 
 
   products = [

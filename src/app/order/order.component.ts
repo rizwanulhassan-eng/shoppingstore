@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-order-page',
   templateUrl: './order.component.html',
@@ -20,12 +20,11 @@ export class OrderPageComponent implements OnInit {
     (new Date().getFullYear() + i).toString()
   );
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private router:Router) {
     this.paymentForm = this.fb.group({
       fullName: ['', Validators.required],
       address: ['', Validators.required],
       zipcode: ['', Validators.required],
-      country: ['', Validators.required],
       cardNumber: ['', Validators.required],
       expMonth: ['', Validators.required],
       expYear: ['', Validators.required],
@@ -107,6 +106,7 @@ export class OrderPageComponent implements OnInit {
       alert('Order placed successfully!');
       // Optionally, clear the cart after placing the order
       localStorage.removeItem('cart');
+      this.router.navigate(['']);
     }
   }
 }
