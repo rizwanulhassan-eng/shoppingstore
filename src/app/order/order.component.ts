@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartCountService } from '../services/cart-count.service';
 @Component({
   selector: 'app-order-page',
   templateUrl: './order.component.html',
@@ -20,7 +21,7 @@ export class OrderPageComponent implements OnInit {
     (new Date().getFullYear() + i).toString()
   );
 
-  constructor(private fb: FormBuilder,private router:Router) {
+  constructor(private fb: FormBuilder,private router:Router,private cartcountservice:CartCountService) {
     this.paymentForm = this.fb.group({
       fullName: ['', Validators.required],
       address: ['', Validators.required],
@@ -105,6 +106,7 @@ export class OrderPageComponent implements OnInit {
 
       // Optionally, clear the cart after placing the order
       sessionStorage.removeItem('cart');
+      this.cartcountservice.updateCartLength();
       this.router.navigate(['']);
     }
   }

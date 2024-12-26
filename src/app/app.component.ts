@@ -3,6 +3,7 @@ import { CartCountService } from './services/cart-count.service';
 import { LoggingService } from './services/logging.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,8 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent implements OnInit{
   
   cartCount: number = 0;
-  loggedin!:boolean;
   show=false;
+  loggedin$ = new BehaviorSubject<boolean>(false);
   
   constructor(private cartCountService:CartCountService,private loggingservice:LoggingService,private router:Router,private route: ActivatedRoute){
 
@@ -36,9 +37,8 @@ export class AppComponent implements OnInit{
   });
   this.route.queryParams.subscribe((params)=>
   {
-    this.loggedin=params['checker']
+    this.loggedin$.next(true);
   })
-  console.log(this.loggedin);
 }
 
 
@@ -47,11 +47,10 @@ showprofile()
   this.show=!this.show;
 }
 logout(){
-  console.log(this.loggedin);
   this.loggingservice.setloggedininfo('false');
+  sessionStorage.setItem('isLoggedIn','false');
   this.show=!this.show;
-  this.loggedin=this.loggingservice.getloggedininfo();
-  this.loggedin=true;
+  this.loggedin$.next(false);
   this.router.navigate(['/login']);
 }
 
@@ -65,7 +64,7 @@ closeNavbar(): void {
   this.isNavbarCollapsed = true; 
 }
 
-@HostListener('window:resize', ['$event'])
+@HostListener('window:resize', ['event'])
   onResize(event: Event): void {
     this.adjustNavbarOnResize();
   }

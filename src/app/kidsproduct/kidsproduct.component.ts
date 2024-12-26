@@ -13,7 +13,7 @@ export class KidsproductComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
   categories: string[] = [];
-  selectedCategory: any  = "all";
+  selectedCategory: any  = "All";
   priceRanges = [
     { label: 'All', value: 'all' },
     { label: '0 - 50', value: 'low' },

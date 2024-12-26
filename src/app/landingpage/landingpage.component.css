@@ -299,7 +299,7 @@
   }
   
   .product-card {
-    flex: 0 0 300px; /* Adjust card width */
+    flex: 0 0 300px; 
     position: relative;
     border: 1px solid #ddd;
     border-radius: 5px;
