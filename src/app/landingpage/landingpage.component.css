@@ -6,8 +6,13 @@
   
     /* Keeps the image fixed while scrolling */
     font-family: Arial, sans-serif;
+    font-weight: 800;
   
   
+  }
+
+  p{
+    font-weight: 400;
   }
   
   .landing-section {
@@ -288,7 +293,9 @@
   
   .carousel-container {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    width: 100vw;
+    gap:1%;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none; /* Hide scrollbar for Firefox */
