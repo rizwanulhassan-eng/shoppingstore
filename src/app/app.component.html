@@ -7,10 +7,10 @@
     </div>
   
     
-    <ul class="navbar-links" [ngClass]="{ hidden: isNavbarCollapsed }" >
+    <ul class="navbar-links" [ngClass]="{ hidden: !isNavbarCollapsed }" >
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/womenproduct">Women</a></li>
-      <li><a routerLink="/menproduct">men</a></li>
+      <li><a routerLink="/menproduct">Men</a></li>
       <li><a routerLink="/kidproduct">Kids</a></li>
       <li><a routerLink="/accessories">Accessories</a></li>
       
@@ -49,7 +49,7 @@
 </div>
 
 <ng-template #else1>
-  <ul Class="dropdown-menu">
+  <ul Class="dropdown-menu l p">
     <li routerLink="/profile">Profile</li>
     <li (click)="logout()">Logout</li>
   </ul>

@@ -22,7 +22,10 @@ export class AppComponent implements OnInit{
     this.adjustNavbarOnResize();
     this.updateCartCount();
     const storedProducts = localStorage.getItem('products');
-
+    this.route.queryParams.subscribe((params)=>
+      {
+        this.loggedin$.next(true);
+      })
     if (!storedProducts || JSON.parse(storedProducts).length === 0) {
       localStorage.setItem('products', JSON.stringify(this.products));
       console.log('Products array uploaded to localStorage.');
@@ -30,15 +33,13 @@ export class AppComponent implements OnInit{
       console.log('Products array already exists in localStorage:', JSON.parse(storedProducts));
     }
     if (!sessionStorage.getItem('isLoggedIn')) {
+      this.loggedin$.next(false);
       sessionStorage.setItem('isLoggedIn', 'false');
   }
   this.cartCountService.cartLength$.subscribe((length) => {
     this.cartCount = length;
   });
-  this.route.queryParams.subscribe((params)=>
-  {
-    this.loggedin$.next(true);
-  })
+  
 }
 
 
@@ -54,7 +55,7 @@ logout(){
   this.router.navigate(['/login']);
 }
 
-isNavbarCollapsed = true; 
+isNavbarCollapsed = false; 
 
 toggleNavbar(): void {
   this.isNavbarCollapsed = !this.isNavbarCollapsed;
